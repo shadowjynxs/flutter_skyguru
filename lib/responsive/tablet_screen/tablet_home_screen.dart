@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:skyguru/responsive/mobile_screen/mobile_search_screen.dart';
@@ -119,7 +117,7 @@ class _TabletHomeScreenState extends State<TabletHomeScreen> with SingleTickerPr
                               Text(
                                 'Enter the name of city',
                                 style: TextStyle(
-                                  color: Color.fromARGB(190, 255, 241, 241),
+                                  color: const Color.fromARGB(190, 255, 241, 241),
                                   fontSize: 12.sp,
                                 ),
                               ),
@@ -175,7 +173,5 @@ class _TabletHomeScreenState extends State<TabletHomeScreen> with SingleTickerPr
     );
   }
 
-  void _locateMe() {
-    //TODO
-  }
+  void _locateMe() {}
 }

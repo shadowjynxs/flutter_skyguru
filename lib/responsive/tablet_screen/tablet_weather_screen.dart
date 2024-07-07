@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
-
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +37,7 @@ class _TabletWeatherScreenState extends State<TabletWeatherScreen> with TickerPr
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     _controller.addStatusListener((status) {
@@ -172,7 +169,7 @@ class _TabletWeatherScreenState extends State<TabletWeatherScreen> with TickerPr
                   bloc: _weatherBloc,
                   builder: (context, state) {
                     if (state is WeatherLoading) {
-                      return Center(
+                      return const Center(
                         child: SpinKitThreeBounce(
                           color: Colors.orange,
                         ),
@@ -206,7 +203,6 @@ class _TabletWeatherScreenState extends State<TabletWeatherScreen> with TickerPr
                     vertical: 10.h,
                   ),
                   child: Container(
-
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.white,
@@ -348,7 +344,7 @@ class _TabletWeatherScreenState extends State<TabletWeatherScreen> with TickerPr
                                     FontWeight.w400,
                                   ),
                                   customText(
-                                    '${weather.windSpeed} km/h',
+                                    '${weather.feelsLike.toStringAsFixed(0)} °C',
                                     14.sp,
                                     FontWeight.w400,
                                   ),
@@ -366,7 +362,7 @@ class _TabletWeatherScreenState extends State<TabletWeatherScreen> with TickerPr
                   child: Transform.rotate(
                     angle: _offset / 50 < 5 ? _offset / 50 : 5,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -101,7 +99,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                 textAlignVertical: TextAlignVertical.center,
                 autofocus: true,
                 cursorColor: Colors.orange,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -116,7 +114,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.red,
                     ),
                     borderRadius: BorderRadius.circular(50),
@@ -125,7 +123,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                     onTap: () {
                       startSearch(_searchController.text);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.search_rounded,
                       color: Colors.white,
                     ),
@@ -136,7 +134,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                     fontSize: 10.5.sp,
                     fontWeight: FontWeight.w400,
                   ),
-                  fillColor: Color(0xFF0E131F),
+                  fillColor: const Color(0xFF0E131F),
                   filled: true,
                 ),
               ),
@@ -174,7 +172,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
           bloc: _weatherBloc,
           builder: (context, state) {
             if (state is WeatherLoading) {
-              return Center(
+              return const Center(
                 child: SpinKitThreeBounce(
                   color: Colors.orange,
                 ),
@@ -220,9 +218,9 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                                 direction: DismissDirection.endToStart,
                                 background: Container(
                                   alignment: Alignment.centerRight,
-                                  padding: EdgeInsets.only(right: 20),
+                                  padding: const EdgeInsets.only(right: 20),
                                   color: Colors.red,
-                                  child: Icon(Icons.delete, color: Colors.white),
+                                  child: const Icon(Icons.delete, color: Colors.white),
                                 ),
                                 onDismissed: (direction) {
                                   setState(() {
@@ -231,7 +229,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                                   _updateRecentSearchInPrefs();
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       border: Border(
@@ -242,7 +240,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                                       ),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -261,7 +259,7 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
                                               });
                                               _updateRecentSearchInPrefs();
                                             },
-                                            child: Icon(
+                                            child: const Icon(
                                               Icons.delete,
                                               color: Colors.red,
                                             ),

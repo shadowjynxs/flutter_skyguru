@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -19,7 +17,7 @@ class MobileSplashScreen extends StatelessWidget {
       backgroundColor: Colors.grey.shade400,
       splashIconSize: 100.h,
       splashTransition: SplashTransition.scaleTransition,
-      animationDuration: Duration(microseconds: 750000),
+      animationDuration: const Duration(microseconds: 750000),
       splash: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -37,13 +35,13 @@ class MobileSplashScreen extends StatelessWidget {
             child: Lottie.asset(
               'lib/assets/logo.json',
               fit: BoxFit.contain,
-              frameRate: FrameRate(120),
+              frameRate: const FrameRate(120),
               renderCache: RenderCache.raster,
             ),
           ),
           TweenAnimationBuilder(
             tween: Tween<double>(begin: 0.0, end: 1.0),
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
             builder: (context, double value, child) {
               return Stack(
                 children: [
@@ -59,7 +57,7 @@ class MobileSplashScreen extends StatelessWidget {
                     shaderCallback: (rect) {
                       return LinearGradient(
                         stops: [value, value],
-                        colors: [Colors.blue, Colors.white],
+                        colors: const [Colors.blue, Colors.white],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ).createShader(
@@ -85,12 +83,12 @@ class MobileSplashScreen extends StatelessWidget {
               );
             },
           ),
-          SpinKitThreeBounce(
+          const SpinKitThreeBounce(
             color: Colors.blue,
           ),
         ],
       ),
-      nextScreen: ResponsiveLayout(
+      nextScreen: const ResponsiveLayout(
         mobileScreen: MobileHomeScreen(),
         tabletScreen: TabletHomeScreen(),
       ),

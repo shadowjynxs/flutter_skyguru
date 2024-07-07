@@ -37,8 +37,8 @@ flutter_native_splash:
   web: true
 
   color: "#d4e4ed"
-  image: "lib/assets/logo/png/logo-no-background.png"
+  image: "lib/assets/logo.png"
 
   android_12:
     color: "#d4e4ed"
-    image: "lib/assets/logo/png/logo-no-background.png"
+    image: "lib/assets/logo.png"

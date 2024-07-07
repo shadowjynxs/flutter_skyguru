@@ -30,7 +30,7 @@ class Weather {
       icon: json['weather'][0]['icon'],
       humidity: json['main']['humidity'],
       windSpeed: json['wind']['speed'].toDouble(),
-      feelsLike: json['main']['feels_like'],
+      feelsLike: json['main']['feels_like'] - 273.15,
       tempMin: json['main']['temp_min'] - 273.15,
       tempMax: json['main']['temp_max'] - 273.15,
 
