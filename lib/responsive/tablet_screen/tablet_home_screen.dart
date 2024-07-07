@@ -1,12 +1,10 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skyguru/repositories/weather_repository.dart';
-import 'package:skyguru/responsive/mobile_screen/mobile_weather_screen.dart';
+import 'package:sizer/sizer.dart';
+import 'package:skyguru/responsive/mobile_screen/mobile_search_screen.dart';
 import 'package:skyguru/responsive/responsive_layout.dart';
-import 'package:skyguru/responsive/tablet_screen/tablet_weather_screen.dart';
-import '../../blocs/weather/weather_bloc.dart';
-import '../../blocs/weather/weather_event.dart';
-import '../../blocs/weather/weather_state.dart';
+import 'package:skyguru/responsive/tablet_screen/tablet_search_screen.dart';
 
 class TabletHomeScreen extends StatefulWidget {
   const TabletHomeScreen({super.key});
@@ -15,97 +13,169 @@ class TabletHomeScreen extends StatefulWidget {
   State<TabletHomeScreen> createState() => _TabletHomeScreenState();
 }
 
-class _TabletHomeScreenState extends State<TabletHomeScreen> {
-  late TextEditingController _cityController;
-  late WeatherBloc _weatherBloc;
+class _TabletHomeScreenState extends State<TabletHomeScreen> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _cityController = TextEditingController();
-    _weatherBloc = WeatherBloc(weatherRepository: WeatherRepository());
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    )..repeat(reverse: true);
   }
 
   @override
   void dispose() {
-    _cityController.dispose();
-    _weatherBloc.close();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0E131F),
       appBar: AppBar(
-        title: const Text('Weather App'),
-      ),
-      body: BlocListener<WeatherBloc, WeatherState>(
-        bloc: _weatherBloc,
-        listener: (context, state) {
-          if (state is WeatherLoaded) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const ResponsiveLayout(
-                  mobileScreen: MobileWeatherScreen(),
-                  tabletScreen: TabletWeatherScreen(),
-                ),
-              ),
-            );
-          } else if (state is WeatherError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Failed to fetch weather: ${state.message}'),
-              ),
-            );
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: _cityController,
-                decoration: InputDecoration(
-                  hintText: 'Enter city name',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      _submitCityName(_cityController.text);
-                    },
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  _submitCityName(_cityController.text);
-                },
-                child: const Text('Get Weather'),
-              ),
-              const SizedBox(height: 20),
-              BlocBuilder<WeatherBloc, WeatherState>(
-                bloc: _weatherBloc,
-                builder: (context, state) {
-                  if (state is WeatherLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return Container();
-                },
-              ),
-            ],
+        backgroundColor: const Color(0xFF0E131F),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 5.w),
+          child: Icon(
+            Icons.menu,
+            color: Colors.white,
+            size: 4.5.h,
           ),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              _locateMe();
+            },
+            child: FadeTransition(
+              opacity: _animationController,
+              child: Icon(
+                Icons.location_on_outlined,
+                color: Colors.white,
+                size: 4.5.h,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 5.w,
+          ),
+          GestureDetector(
+            onTap: () {
+              _navigatePage();
+            },
+            child: Padding(
+              padding: EdgeInsets.only(right: 5.w),
+              child: Icon(
+                Icons.search_outlined,
+                color: Colors.white,
+                size: 4.5.h,
+              ),
+            ),
+          )
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 5.w,
+          vertical: 2.h,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _navigatePage();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 3.w,
+                        vertical: 1.h,
+                      ),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(40),
+                        color: Colors.black.withOpacity(0.2),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.search_outlined,
+                                color: Colors.white,
+                                size: 3.5.h,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                'Enter the name of city',
+                                style: TextStyle(
+                                  color: Color.fromARGB(190, 255, 241, 241),
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Icon(
+                            Icons.map_rounded,
+                            color: Colors.white,
+                            size: 3.5.h,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.white,
+                    size: 15.h,
+                  ),
+                  Text(
+                    "Use GPS",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
   }
 
-  void _submitCityName(String cityName) {
-    if (cityName.isNotEmpty) {
-      _weatherBloc.add(FetchWeather(cityName: cityName));
-    }
+  void _navigatePage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const ResponsiveLayout(
+          mobileScreen: MobileSearchScreen(),
+          tabletScreen: TabletSearchScreen(),
+        ),
+      ),
+    );
+  }
+
+  void _locateMe() {
+    //TODO
   }
 }

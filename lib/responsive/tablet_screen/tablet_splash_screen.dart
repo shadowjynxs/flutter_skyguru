@@ -15,7 +15,6 @@ class TabletSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
 
     return AnimatedSplashScreen(
       backgroundColor: Colors.grey.shade400,
@@ -27,7 +26,7 @@ class TabletSplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 33.w,
+              width: 25.w,
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   colors: [

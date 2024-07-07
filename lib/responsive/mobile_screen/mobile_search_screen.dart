@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:skyguru/blocs/weather/weather_bloc.dart';
@@ -175,7 +175,9 @@ class _MobileSearchScreenState extends State<MobileSearchScreen> {
           builder: (context, state) {
             if (state is WeatherLoading) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: SpinKitThreeBounce(
+                  color: Colors.orange,
+                ),
               );
             }
             return _recentSearch.isEmpty
