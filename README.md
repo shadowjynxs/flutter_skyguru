@@ -7,7 +7,7 @@
 
 ![Flutter](https://img.shields.io/badge/Platform-Flutter-blue)
 ![minSdkVersion](https://img.shields.io/badge/minSdkVersion-23-green.svg)
-[![Crowdin](https://badges.crowdin.net/weatherwise/localized.svg)](https://crowdin.com/project/weatherwise)
+
 
 </div>
 
@@ -39,3 +39,5 @@
 | ----------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------ |
 
 ---
+https://github.com/shadowjynxs/flutter_skyguru/assets/54329604/da47e81c-7253-43b5-9351-f05540d117ad
+
